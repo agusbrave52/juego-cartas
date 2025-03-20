@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/juego-cartas/static/css/main.4ec669cc.css",
+    "main.js": "/juego-cartas/static/js/main.93ffd760.js",
+    "static/js/453.934cfdc5.chunk.js": "/juego-cartas/static/js/453.934cfdc5.chunk.js",
+    "static/media/rpgawesome-webfont.svg?v=0.1.0": "/juego-cartas/static/media/rpgawesome-webfont.4f724738b005f669850f.svg",
+    "static/media/rpgawesome-webfont.eot": "/juego-cartas/static/media/rpgawesome-webfont.1f1819e8b61f5626559b.eot",
+    "static/media/rpgawesome-webfont.woff?v=0.1.0": "/juego-cartas/static/media/rpgawesome-webfont.5ddfbfc57fa24b191636.woff",
+    "static/media/rpgawesome-webfont.ttf?v=0.1.0": "/juego-cartas/static/media/rpgawesome-webfont.3887a57418d58656fd5d.ttf",
+    "static/media/logo.svg": "/juego-cartas/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/juego-cartas/index.html",
+    "main.4ec669cc.css.map": "/juego-cartas/static/css/main.4ec669cc.css.map",
+    "main.93ffd760.js.map": "/juego-cartas/static/js/main.93ffd760.js.map",
+    "453.934cfdc5.chunk.js.map": "/juego-cartas/static/js/453.934cfdc5.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4ec669cc.css",
+    "static/js/main.93ffd760.js"
+  ]
+}
