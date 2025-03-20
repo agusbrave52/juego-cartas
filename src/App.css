@@ -28,6 +28,31 @@
   color: #61dafb;
 }
 
+.d-flex.flex-nowrap {
+  flex-wrap: nowrap; /* Evita que las cartas se envuelvan */
+  overflow-x: auto; /* Habilita el desplazamiento horizontal */
+  padding: 10px; /* Espaciado interno */
+}
+
+.card-fixed {
+  width: 200px; /* Ancho fijo para las cartas */
+  height: 300px; /* Alto fijo para las cartas */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden; /* Oculta contenido que exceda el tamaño */
+  text-align: center; /* Centra el texto */
+}
+
+.qr-reader-container {
+  width: 300px;
+  margin: 0 auto;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -36,3 +61,4 @@
     transform: rotate(360deg);
   }
 }
+
