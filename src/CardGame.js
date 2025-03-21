@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 import "rpg-awesome/css/rpg-awesome.min.css";
 import "./App.css";
+import QRScanner from "./QRScanner.js";
 
 const cardList = [
     {
@@ -462,22 +463,15 @@ export default function CardGame() {
         }
     };
 
-    const handleQrScan = (result) => {
-        if (result?.text) {
-            const cardId = parseInt(result.text); // Obtén el ID de la carta desde el QR
-            if (!isNaN(cardId)) {
-                const card = cardList.find((c) => c.id === cardId); // Busca la carta en la lista
-                if (card) {
-                    addCardToBoard(selectedPlayer, card); // Agrega la carta al tablero del jugador seleccionado
-                    alert(`Carta "${card.name}" agregada al Jugador ${selectedPlayer}`);
-                } else {
-                    alert("No se encontró una carta con este ID.");
-                }
-            } else {
-                alert("El código QR no contiene un ID válido.");
-            }
-        }
-        setQrScannerVisible(false); // Oculta el lector de QR después de escanear
+    const handleQrScanSuccess = (decodedText) => {
+        console.log("Texto escaneado:", decodedText);
+        // Aquí puedes manejar el texto del QR, por ejemplo, agregar una carta
+        alert(`Código QR escaneado: ${decodedText}`);
+        setQrScannerVisible(false); // Oculta el escáner después de escanear
+    };
+
+    const handleQrScanError = (error) => {
+        console.error("Error al escanear el QR:", error);
     };
 
     const usarHabilidad = (habilidad) => {
@@ -706,24 +700,10 @@ export default function CardGame() {
             </button>
             {qrScannerVisible && (
                 <div className="qr-reader-container mt-3">
-                    <QrScanner
-                        delay={300}
-                        style={{ width: "100%" }}
-                        constraints={{
-                            video: { facingMode: "environment" },
-                        }}
-                        onError={(error) => {
-                            console.error("Error del QR:", error);
-                            alert("Hubo un error al escanear el código QR.");
-                        }}
-                        onScan={(result) => {
-                            if (result) {
-                                console.log("Resultado del QR:", result);
-                                handleQrScan(result); // Llama a tu función para manejar el resultado
-                            } else {
-                                console.log("No se detectó ningún código QR.");
-                            }
-                        }}
+                    <p>Escanea el QR de la carta.</p>
+                    <QRScanner
+                        onScanSuccess={handleQrScanSuccess}
+                        onScanError={handleQrScanError}
                     />
                 </div>
             )}
