@@ -333,6 +333,7 @@ export default function CardGame() {
     const [currentTurn, setCurrentTurn] = useState(1); // 1 para Jugador 1, 2 para Jugador 2
     const [cardUsingAbility, setCardUsingAbility] = useState(null); // Carta que activa la habilidad
     const [qrScannerVisible, setQrScannerVisible] = useState(false); // Estado para mostrar/ocultar el lector de QR
+    const [qrProcessed, setQrProcessed] = useState(false); // Nuevo estado para evitar múltiples lecturas
 
     const toggleGraveyard = () => {
         setShowGraveyard(!showGraveyard); // Alterna entre mostrar y ocultar el cementerio
@@ -464,9 +465,14 @@ export default function CardGame() {
     };
 
     const handleQrScanSuccess = (decodedText) => {
+        if (qrProcessed) return; // Si ya se procesó un QR, no hacer nada
+
         console.log("Texto escaneado:", decodedText);
+
         // Aquí puedes manejar el texto del QR, por ejemplo, agregar una carta
         alert(`Código QR escaneado: ${decodedText}`);
+
+        setQrProcessed(true); // Marca el QR como procesado
         setQrScannerVisible(false); // Oculta el escáner después de escanear
     };
 
@@ -694,10 +700,14 @@ export default function CardGame() {
             <h3>Selecciona una carta para agregar</h3>
             <button
                 className="btn btn-secondary mt-3 mx-1"
-                onClick={() => setQrScannerVisible(!qrScannerVisible)}
+                onClick={() => {
+                    setQrProcessed(false); // Restablece el estado para permitir un nuevo escaneo
+                    setQrScannerVisible(!qrScannerVisible);
+                }}
             >
                 {qrScannerVisible ? "Cerrar Lector QR" : "Agregar Carta con QR"}
             </button>
+
             {qrScannerVisible && (
                 <div className="qr-reader-container mt-3">
                     <p>Escanea el QR de la carta.</p>

@@ -25,7 +25,9 @@ export default function QRScanner({ onScanSuccess, onScanError }) {
 
         // Limpia el escáner al desmontar el componente
         return () => {
-            scanner.clear().catch((error) => {
+            scanner.clear().then(() => {
+                console.log("Escáner limpiado correctamente.");
+            }).catch((error) => {
                 console.error("Error al limpiar el escáner:", error);
             });
         };
