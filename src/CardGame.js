@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "animate.css";
 import "rpg-awesome/css/rpg-awesome.min.css";
 import "./App.css";
-import QRScanner from "./QRScanner.js";
+import Html5QrcodePlugin from "./Html5QrcodeScannerPlugin.js";
 
 const cardList = [
     {
@@ -464,20 +464,22 @@ export default function CardGame() {
         }
     };
 
-    const handleQrScanSuccess = (decodedText) => {
-        if (qrProcessed) return; // Si ya se procesó un QR, no hacer nada
+    const onNewScanResult = (decodedText, decodedResult) => {
+        // if (qrProcessed) return; // Si ya se procesó un QR, no hacer nada
 
-        console.log("Texto escaneado:", decodedText);
+        // console.log("Texto escaneado:", decodedText);
 
-        // Aquí puedes manejar el texto del QR, por ejemplo, agregar una carta
-        alert(`Código QR escaneado: ${decodedText}`);
+        // setSelectedCard(
+        //     cardList.find((card) => card.id === Number(decodedText))
+        // )
+        
+        // // Aquí puedes manejar el texto del QR, por ejemplo, agregar una carta
+        // alert(`Código QR escaneado: ${decodedText}`);
 
-        setQrProcessed(true); // Marca el QR como procesado
-        setQrScannerVisible(false); // Oculta el escáner después de escanear
-    };
+        // setQrProcessed(true); // Marca el QR como procesado
+        // setQrScannerVisible(false); // Oculta el escáner después de escanear
 
-    const handleQrScanError = (error) => {
-        console.error("Error al escanear el QR:", error);
+        
     };
 
     const usarHabilidad = (habilidad) => {
@@ -711,9 +713,11 @@ export default function CardGame() {
             {qrScannerVisible && (
                 <div className="qr-reader-container mt-3">
                     <p>Escanea el QR de la carta.</p>
-                    <QRScanner
-                        onScanSuccess={handleQrScanSuccess}
-                        onScanError={handleQrScanError}
+                    <Html5QrcodePlugin
+                        fps={10}
+                        qrbox={250}
+                        disableFlip={false}
+                        qrCodeSuccessCallback={onNewScanResult}
                     />
                 </div>
             )}
@@ -832,6 +836,7 @@ export default function CardGame() {
             >
                 Saltar Turno (Jugador {currentTurn})
             </button>
+            <script src="html5-qrcode.min.js"></script>
         </div>
     );
 }
